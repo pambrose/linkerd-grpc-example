@@ -1,0 +1,22 @@
+syntax = "proto3";
+package rosbridge_service;
+
+import public "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "com.pambrose.grpc";
+
+message HelloData {
+    string text = 1;
+    int32 count = 2;
+}
+
+service RosBridgeService {
+    rpc writeHelloData (HelloData) returns (google.protobuf.Empty);
+
+    rpc writeStreamingHelloData (stream HelloData) returns (google.protobuf.Empty);
+
+    rpc readStreamingHelloData (HelloData) returns (stream HelloData);
+
+    rpc readWriteStreamingHelloData (HelloData) returns (stream HelloData);
+}
